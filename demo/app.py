@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.join(ROOT, 'app'))
 
 st.set_page_config(
     page_title="Credit Approval ML",
-    page_icon="💳",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -38,7 +38,7 @@ models_path = os.path.join(ROOT, 'models')
 preprocessor_path = os.path.join(models_path, 'preprocessor.pkl')
 
 if not os.path.exists(preprocessor_path):
-    with st.spinner("🔧 First run — training models (this takes ~60 seconds)..."):
+    with st.spinner("First run — training models (this takes ~60 seconds)..."):
         os.makedirs(models_path, exist_ok=True)
         os.makedirs(os.path.join(ROOT, 'reports', 'plots'), exist_ok=True)
         import subprocess
@@ -49,7 +49,7 @@ if not os.path.exists(preprocessor_path):
         if result.returncode != 0:
             st.error(f"Training failed:\n{result.stderr}")
             st.stop()
-    st.success("✅ Models trained! Loading demo...")
+    st.success("Models trained! Loading demo...")
     st.rerun()
 
 # ── Load artefacts ────────────────────────────────────────────────────────────
@@ -89,11 +89,11 @@ except Exception as e:
 FEATURE_COLS = preprocessor.feature_columns
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
-st.sidebar.title("💳 Credit Approval ML")
+st.sidebar.title("Credit Approval ML")
 st.sidebar.caption("UCI Credit Approval · SVM & Decision Tree")
 
 page = st.sidebar.radio("Navigate", [
-    "🔍 Live Predictor", "📊 Model Performance", "📈 Data Explorer", "ℹ️ About"
+    "Live Predictor", "Model Performance", "Data Explorer", "About"
 ], label_visibility="collapsed")
 
 st.sidebar.markdown("---")
@@ -105,8 +105,8 @@ st.sidebar.markdown(f"**DT AUC:** {metrics['decision_tree']['roc_auc']:.3f}")
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE 1 — LIVE PREDICTOR
 # ═══════════════════════════════════════════════════════════════════════════════
-if page == "🔍 Live Predictor":
-    st.title("💳 Credit Card Approval Predictor")
+if page == "Live Predictor":
+    st.title("Credit Card Approval Predictor")
     st.caption("Adjust the applicant profile and get instant model predictions.")
 
     col_form, col_result = st.columns([1.1, 0.9], gap="large")
@@ -170,9 +170,9 @@ if page == "🔍 Live Predictor":
             pct = prob * 100
 
             if approved:
-                st.markdown('<p class="approved">✅ APPROVED</p>', unsafe_allow_html=True)
+                st.markdown('<p class="approved">APPROVED</p>', unsafe_allow_html=True)
             else:
-                st.markdown('<p class="denied">❌ DENIED</p>', unsafe_allow_html=True)
+                st.markdown('<p class="denied">DENIED</p>', unsafe_allow_html=True)
 
             st.progress(prob)
 
@@ -203,8 +203,8 @@ if page == "🔍 Live Predictor":
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE 2 — MODEL PERFORMANCE
 # ═══════════════════════════════════════════════════════════════════════════════
-elif page == "📊 Model Performance":
-    st.title("📊 Model Performance")
+elif page == "Model Performance":
+    st.title("Model Performance")
     tab1, tab2, tab3 = st.tabs(["Metrics", "ROC Curves", "Confusion Matrices"])
 
     with tab1:
@@ -273,8 +273,8 @@ elif page == "📊 Model Performance":
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE 3 — DATA EXPLORER
 # ═══════════════════════════════════════════════════════════════════════════════
-elif page == "📈 Data Explorer":
-    st.title("📈 Data Explorer")
+elif page == "Data Explorer":
+    st.title("Data Explorer")
     tab1, tab2, tab3 = st.tabs(["Overview","Distributions","Correlations"])
 
     with tab1:
@@ -333,8 +333,8 @@ elif page == "📈 Data Explorer":
 # ═══════════════════════════════════════════════════════════════════════════════
 # PAGE 4 — ABOUT
 # ═══════════════════════════════════════════════════════════════════════════════
-elif page == "ℹ️ About":
-    st.title("ℹ️ About")
+elif page == "About":
+    st.title("About")
     st.markdown("""
 ## Credit Card Approval Prediction
 
