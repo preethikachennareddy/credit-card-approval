@@ -650,7 +650,7 @@ as an interactive front end.
 | Tests | pytest (17 unit tests) |
 """)
 
-   with col2:
+    with col2:
         st.markdown("""
 #### Dataset
 **Source:** [UCI ML Repository — Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)
