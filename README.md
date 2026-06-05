@@ -22,7 +22,7 @@
 
 **[https://credit-card-approval-preethika.streamlit.app](https://credit-card-approval-preethika.streamlit.app)**
 
-The interactive demo lets you build an applicant profile using readable dropdowns (gender, marital status, citizenship, employment, credit purpose, etc.) and get instant predictions from both models — with approval probability, risk level, confidence score, and live charts.
+The interactive demo lets you build an applicant profile using readable dropdowns (gender, marital status, citizenship, employment, credit purpose, etc.) and get instant predictions from both models with approval probability, risk level, confidence score, and live charts.
 
 To run locally instead:
 ```bash
@@ -299,14 +299,4 @@ UCI Machine Learning Repository — [Credit Approval](https://archive.ics.uci.ed
 
 690 instances · 15 features · Binary classification · 67 missing values (handled via imputation) · 44.5% approval rate
 
----
-
-## License
-
-MIT
-
----
-
-<div align="center">
-Built by <strong>Preethika Chennareddy</strong> · <a href="https://github.com/preethikachennareddy/credit-card-approval">GitHub</a> · <a href="https://credit-card-approval-preethika.streamlit.app">Live Demo</a>
 </div>
