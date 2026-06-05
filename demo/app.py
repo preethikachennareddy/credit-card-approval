@@ -207,7 +207,7 @@ page = st.sidebar.radio("", [
 st.sidebar.markdown("---")
 st.sidebar.markdown("**Dataset**")
 st.sidebar.markdown("690 applicants · 15 features")
-st.sidebar.markdown(f"Approval rate: 44.5%")
+st.sidebar.markdown("44.5% approved in dataset")
 st.sidebar.markdown("**Models**")
 st.sidebar.markdown(f"SVM · AUC {metrics['svm']['roc_auc']:.3f}")
 st.sidebar.markdown(f"Decision Tree · AUC {metrics['decision_tree']['roc_auc']:.3f}")
