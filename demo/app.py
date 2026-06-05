@@ -652,7 +652,7 @@ as an interactive front end.
 
     with col2:
         st.markdown("### Dataset")
-        st.markdown("**Source:** [UCI ML Repository — Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)")
+        st.markdown("**Source:** [UCI ML Repository: Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)")
         st.markdown("""
 - 690 applicants
 - 15 anonymized features
