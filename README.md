@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💳 Credit Card Approval Prediction
+# Credit Card Approval Prediction
 
 **Machine learning backend service predicting credit card approvals using SVM and Decision Trees**
 
@@ -16,7 +16,7 @@
 
 ---
 
-## ✨ Demo
+## Demo
 
 ```bash
 pip install -r requirements.txt
@@ -28,7 +28,7 @@ The Streamlit demo lets you adjust an applicant profile with sliders and get ins
 
 ---
 
-## 📋 Overview
+## Overview
 
 Built on the [UCI Credit Approval dataset](https://archive.ics.uci.edu/dataset/27/credit+approval) (690 applicants, 15 anonymized features). The pipeline covers everything from raw data ingestion to a REST API and Power BI dashboards.
 
@@ -40,7 +40,7 @@ crx_raw.csv  →  Preprocessing  →  SVM / Decision Tree  →  FastAPI  →  Po
 
 ---
 
-## 📊 Model Performance
+## Model Performance
 
 Trained with `GridSearchCV` (5-fold cross-validation, ROC-AUC scoring) on an 80/20 train-test split.
 
@@ -81,7 +81,7 @@ Actual Denied    73       4
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 credit-card-approval/
@@ -123,7 +123,7 @@ credit-card-approval/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Option A — Demo only (no Docker needed)
 
@@ -159,7 +159,7 @@ python app/db_loader.py
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 ### `POST /predict`
 
@@ -203,7 +203,7 @@ curl -X POST http://localhost:8000/predict \
 
 ---
 
-## 🗄 Database
+## Database
 
 PostgreSQL schema includes:
 
@@ -217,7 +217,7 @@ PostgreSQL schema includes:
 
 ---
 
-## 📈 Visualisations Generated
+## Visualisations Generated
 
 Running `python app/train.py` produces 12 Seaborn plots in `reports/plots/`:
 
@@ -237,7 +237,7 @@ Running `python app/train.py` produces 12 Seaborn plots in `reports/plots/`:
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ```bash
 pytest tests/ -v
@@ -251,7 +251,7 @@ Covers: preprocessor fit/transform, missing value imputation, label encoding, un
 
 ---
 
-## 📊 Power BI
+## Power BI
 
 See [`powerbi/POWERBI_GUIDE.md`](powerbi/POWERBI_GUIDE.md) for full setup.
 
@@ -276,7 +276,7 @@ See [`powerbi/POWERBI_GUIDE.md`](powerbi/POWERBI_GUIDE.md) for full setup.
 
 ---
 
-## 📄 Dataset
+## Dataset
 
 UCI Machine Learning Repository — [Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)
 
@@ -286,6 +286,3 @@ UCI Machine Learning Repository — [Credit Approval](https://archive.ics.uci.ed
 
 ---
 
-## 📝 License
-
-MIT
