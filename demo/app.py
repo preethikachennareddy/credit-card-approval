@@ -239,36 +239,66 @@ if page == "Live Predictor":
 
     col_form, col_result = st.columns([1.15, 0.85], gap="large")
 
+    # Lookup maps — display label -> model code
+    GENDER_MAP      = {"Male": "b", "Female": "a"}
+    MARRIED_MAP     = {"Married": "u", "Single": "y", "Other": "l"}
+    BANK_MAP        = {"Existing customer": "g", "New customer": "p", "Former customer": "gg"}
+    CITIZEN_MAP     = {"Citizen": "g", "Permanent resident": "p", "Temporary resident": "s"}
+    YESNO_TF_MAP    = {"Yes": "t", "No": "f"}
+    YESNO_FT_MAP    = {"Yes": "t", "No": "f"}
+    EDUCATION_MAP   = {
+        "Consumer goods": "c", "Retail / trade": "r", "Credit card": "cc",
+        "Investment": "i", "Student loan": "j", "Car loan": "k",
+        "Mortgage": "m", "Other debt": "d", "Personal loan": "q",
+        "Business": "w", "Mixed credit": "x", "Education loan": "e",
+        "Home equity": "aa", "None / unknown": "ff"
+    }
+    ETHNICITY_MAP   = {
+        "Group A": "v", "Group B": "h", "Group C": "bb", "Group D": "j",
+        "Group E": "n", "Group F": "z", "Group G": "dd", "Group H": "ff", "Group I": "o"
+    }
+
     with col_form:
         st.markdown('<div class="section-title">Personal information</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
         with c1:
-            gender        = st.selectbox("Gender", ["b","a"], format_func=lambda x: "Male" if x=="b" else "Female")
+            gender_label  = st.selectbox("Gender", list(GENDER_MAP.keys()))
             age           = st.slider("Age", 15, 80, 30)
-            married       = st.selectbox("Marital status", ["u","y"], format_func=lambda x: "Married" if x=="u" else "Single")
+            married_label = st.selectbox("Marital status", list(MARRIED_MAP.keys()))
         with c2:
-            bank_customer = st.selectbox("Bank customer type", ["g","p","gg"])
-            citizen       = st.selectbox("Citizenship", ["g","p","s"])
-            drivers_lic   = st.selectbox("Driver's licence", ["f","t"], format_func=lambda x: "Yes" if x=="t" else "No")
+            bank_label    = st.selectbox("Bank relationship", list(BANK_MAP.keys()))
+            citizen_label = st.selectbox("Citizenship status", list(CITIZEN_MAP.keys()))
+            driv_label    = st.selectbox("Driver's licence", ["No", "Yes"])
 
         st.markdown('<div class="section-title">Financial profile</div>', unsafe_allow_html=True)
         c3, c4 = st.columns(2)
         with c3:
             income        = st.number_input("Annual income ($)", 0, 200000, 35000, step=1000)
             debt          = st.slider("Debt ratio", 0.0, 30.0, 2.0, 0.5)
-            credit_score  = st.slider("Credit history score", 0, 67, 3)
+            credit_score  = st.slider("Credit history score (0 = none, 67 = excellent)", 0, 67, 3)
         with c4:
             years_emp     = st.slider("Years employed", 0.0, 30.0, 4.0, 0.5)
-            prior_default = st.selectbox("Prior default", ["f","t"], format_func=lambda x: "Yes" if x=="t" else "No")
-            employed      = st.selectbox("Currently employed", ["t","f"], format_func=lambda x: "Yes" if x=="t" else "No")
+            default_label = st.selectbox("Prior default on record", ["No", "Yes"])
+            employed_label= st.selectbox("Currently employed", ["Yes", "No"])
 
-        st.markdown('<div class="section-title">Other details</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Loan & background details</div>', unsafe_allow_html=True)
         c5, c6 = st.columns(2)
         with c5:
-            education_level = st.selectbox("Education level", ["c","d","cc","i","j","k","m","r","q","w","x","e","aa","ff"])
-            zip_code = st.number_input("Zip code", 0, 99999, 200)
+            edu_label     = st.selectbox("Primary credit purpose", list(EDUCATION_MAP.keys()))
+            zip_code      = st.number_input("Zip code", 0, 99999, 200)
         with c6:
-            ethnicity = st.selectbox("Ethnicity code", ["v","h","bb","j","n","z","dd","ff","o"])
+            eth_label     = st.selectbox("Applicant group", list(ETHNICITY_MAP.keys()))
+
+        # Convert display labels back to model codes
+        gender        = GENDER_MAP[gender_label]
+        married       = MARRIED_MAP[married_label]
+        bank_customer = BANK_MAP[bank_label]
+        citizen       = CITIZEN_MAP[citizen_label]
+        drivers_lic   = "t" if driv_label == "Yes" else "f"
+        prior_default = "t" if default_label == "Yes" else "f"
+        employed      = "t" if employed_label == "Yes" else "f"
+        education_level = EDUCATION_MAP[edu_label]
+        ethnicity     = ETHNICITY_MAP[eth_label]
 
         model_choice = st.radio("Model", ["SVM", "Decision Tree", "Ensemble (both)"], horizontal=True)
 
