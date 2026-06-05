@@ -1,5 +1,5 @@
 # Power BI Dashboard Guide
-## Credit Card Approval ML Model — Visual Analytics
+## Credit Card Approval ML Model: Visual Analytics
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## 2. Recommended Pages
 
-### Page 1 — Executive Overview
+### Page 1: Executive Overview
 | Visual | Type | Fields |
 |--------|------|--------|
 | Approval Rate KPI | Card | `AVG(approved)` |
@@ -35,7 +35,7 @@
 | Avg Income by Outcome | Bar | `approved`, `AVG(income)` |
 | Avg Credit Score | Gauge | `AVG(credit_score)` |
 
-### Page 2 — Applicant Demographics
+### Page 2: Applicant Demographics
 | Visual | Type | Fields |
 |--------|------|--------|
 | Approval by Age Group | Stacked Bar | Age group, Count, approved |
@@ -43,7 +43,7 @@
 | Debt vs Income Scatter | Scatter | income (X), debt (Y), approved (color) |
 | Employment Status | Stacked Column | employed, approved |
 
-### Page 3 — Model Performance
+### Page 3: Model Performance
 | Visual | Type | Fields |
 |--------|------|--------|
 | Accuracy by Model | Clustered Bar | model_name, accuracy_pct |
@@ -52,7 +52,7 @@
 | Probability Distribution | Histogram | probability (bins: 10) |
 | Model Comparison | Radar Chart | accuracy, precision, recall, f1, roc_auc |
 
-### Page 4 — Feature Impact
+### Page 4: Feature Impact
 | Visual | Type | Fields |
 |--------|------|--------|
 | Feature Importance Bar | Bar | Feature, Importance (DT) |
