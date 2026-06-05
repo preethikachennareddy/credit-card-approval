@@ -451,7 +451,7 @@ elif page == "Model Performance":
         fi = metrics['decision_tree'].get('feature_importance', [])
         if fi:
             st.markdown("---")
-            st.markdown("#### Decision Tree — Feature importance")
+            st.markdown("#### Decision Tree: Feature importance")
             fi_df = pd.DataFrame(fi).head(10)
             fig, ax = plt.subplots(figsize=(8, 4))
             fig.patch.set_facecolor('white'); ax.set_facecolor('#f8fafc')
@@ -510,7 +510,7 @@ elif page == "Data Explorer":
     st.markdown("""
     <div class="page-header">
         <h1>Data Explorer</h1>
-        <p>UCI Credit Approval dataset — 690 applicants, 15 anonymized features.</p>
+        <p>UCI Credit Approval dataset with 690 applicants, 15 anonymized features.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -611,7 +611,7 @@ elif page == "About":
     st.markdown("""
     <div class="page-header">
         <h1>About this project</h1>
-        <p>Credit Card Approval Prediction — machine learning end-to-end pipeline.</p>
+        <p>An end-to-end machine learning pipeline for Credit Card Approval Prediction.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -653,7 +653,7 @@ as an interactive front end.
     with col2:
         st.markdown("""
 #### Dataset
-**Source:** UCI ML Repository — Credit Approval
+**Source:** UCI ML Repository - Credit Approval
 
 - 690 applicants
 - 15 anonymized features
