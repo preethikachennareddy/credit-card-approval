@@ -149,7 +149,7 @@ credit-card-approval/
 
 ## Quick Start
 
-### Option A — Demo only (no Docker needed)
+### Option A: Demo only (no Docker needed)
 
 ```bash
 git clone https://github.com/preethikachennareddy/credit-card-approval.git
@@ -160,7 +160,7 @@ python app/train.py
 streamlit run demo/app.py
 ```
 
-### Option B — Full stack with Docker
+### Option B: Full stack with Docker
 
 ```bash
 docker-compose up --build
