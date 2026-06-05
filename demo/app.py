@@ -625,7 +625,7 @@ using the UCI Credit Approval dataset. All 15 features are anonymized to protect
 confidentiality.
 
 The pipeline covers raw data ingestion, preprocessing, model training with hyperparameter
-tuning, a REST API, PostgreSQL storage, and Power BI dashboards — with this Streamlit app
+tuning, a REST API, PostgreSQL storage, Power BI dashboards and this Streamlit app
 as an interactive front end.
 
 #### Model results
@@ -639,7 +639,7 @@ as an interactive front end.
 
 | Layer | Technology |
 |-------|-----------|
-| ML models | scikit-learn — SVM & Decision Tree |
+| ML models | SVM (RBF kernel), Decision Tree (entropy), Ensemble |
 | Tuning | GridSearchCV, 5-fold cross-validation |
 | Visualisation | Seaborn, Matplotlib |
 | Demo | Streamlit |
@@ -650,10 +650,10 @@ as an interactive front end.
 | Tests | pytest (17 unit tests) |
 """)
 
-    with col2:
+   with col2:
         st.markdown("""
 #### Dataset
-**Source:** UCI ML Repository - Credit Approval
+**Source:** [UCI ML Repository — Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)
 
 - 690 applicants
 - 15 anonymized features
@@ -664,15 +664,5 @@ as an interactive front end.
 #### Repository
 [github.com/preethikachennareddy/credit-card-approval](https://github.com/preethikachennareddy/credit-card-approval)
 """)
-
-        st.markdown("""
-<div style="background:#f0f4ff;border:1px solid #c7d2fe;border-radius:10px;padding:20px;margin-top:16px;">
-    <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#6366f1;font-weight:500;margin-bottom:8px;">Author</div>
-    <div style="font-size:1.1rem;font-weight:600;color:#1a1f36;">Preethika Chennareddy</div>
-    <div style="font-size:0.85rem;color:#64748b;margin-top:4px;">
-        <a href="https://github.com/preethikachennareddy" style="color:#3b5bdb;text-decoration:none;">github.com/preethikachennareddy</a>
-    </div>
-</div>
-""", unsafe_allow_html=True)
 
     render_footer()
