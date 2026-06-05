@@ -1,0 +1,156 @@
+{
+  "decision_tree": {
+    "model": "Decision Tree",
+    "accuracy": 0.8261,
+    "precision": 0.9111,
+    "recall": 0.6721,
+    "f1_score": 0.7736,
+    "roc_auc": 0.9537,
+    "confusion_matrix": [
+      [
+        73,
+        4
+      ],
+      [
+        20,
+        41
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.7849462365591398,
+        "recall": 0.948051948051948,
+        "f1-score": 0.8588235294117647,
+        "support": 77.0
+      },
+      "1": {
+        "precision": 0.9111111111111111,
+        "recall": 0.6721311475409836,
+        "f1-score": 0.7735849056603774,
+        "support": 61.0
+      },
+      "accuracy": 0.8260869565217391,
+      "macro avg": {
+        "precision": 0.8480286738351255,
+        "recall": 0.8100915477964659,
+        "f1-score": 0.8162042175360711,
+        "support": 138.0
+      },
+      "weighted avg": {
+        "precision": 0.8407147680639967,
+        "recall": 0.8260869565217391,
+        "f1-score": 0.821145587028905,
+        "support": 138.0
+      }
+    },
+    "timestamp": "2026-06-04T21:35:22.622913",
+    "feature_importance": [
+      {
+        "feature": "prior_default",
+        "importance": 0.7066549266578593
+      },
+      {
+        "feature": "credit_score",
+        "importance": 0.13024103525495798
+      },
+      {
+        "feature": "income",
+        "importance": 0.08259812871871146
+      },
+      {
+        "feature": "debt",
+        "importance": 0.055807359373200846
+      },
+      {
+        "feature": "years_employed",
+        "importance": 0.01540813547137286
+      },
+      {
+        "feature": "age",
+        "importance": 0.009290414523897506
+      },
+      {
+        "feature": "gender",
+        "importance": 0.0
+      },
+      {
+        "feature": "married",
+        "importance": 0.0
+      },
+      {
+        "feature": "bank_customer",
+        "importance": 0.0
+      },
+      {
+        "feature": "education_level",
+        "importance": 0.0
+      },
+      {
+        "feature": "ethnicity",
+        "importance": 0.0
+      },
+      {
+        "feature": "employed",
+        "importance": 0.0
+      },
+      {
+        "feature": "drivers_license",
+        "importance": 0.0
+      },
+      {
+        "feature": "citizen",
+        "importance": 0.0
+      },
+      {
+        "feature": "zip_code",
+        "importance": 0.0
+      }
+    ]
+  },
+  "svm": {
+    "model": "SVM",
+    "accuracy": 0.8696,
+    "precision": 0.8909,
+    "recall": 0.8033,
+    "f1_score": 0.8448,
+    "roc_auc": 0.9474,
+    "confusion_matrix": [
+      [
+        71,
+        6
+      ],
+      [
+        12,
+        49
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.8554216867469879,
+        "recall": 0.922077922077922,
+        "f1-score": 0.8875,
+        "support": 77.0
+      },
+      "1": {
+        "precision": 0.8909090909090909,
+        "recall": 0.8032786885245902,
+        "f1-score": 0.8448275862068966,
+        "support": 61.0
+      },
+      "accuracy": 0.8695652173913043,
+      "macro avg": {
+        "precision": 0.8731653888280394,
+        "recall": 0.8626783053012561,
+        "f1-score": 0.8661637931034483,
+        "support": 138.0
+      },
+      "weighted avg": {
+        "precision": 0.8711081480070479,
+        "recall": 0.8695652173913043,
+        "f1-score": 0.868637556221889,
+        "support": 138.0
+      }
+    },
+    "timestamp": "2026-06-04T21:36:32.368287"
+  }
+}
