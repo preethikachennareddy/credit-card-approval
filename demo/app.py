@@ -651,18 +651,16 @@ as an interactive front end.
 """)
 
     with col2:
+        st.markdown("**Dataset**")
+        st.markdown("**Source:** [UCI ML Repository — Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)")
         st.markdown("""
-**Dataset**
-**Source:** [UCI ML Repository: Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)
-
 - 690 applicants
 - 15 anonymized features
 - Binary target: approved / denied
 - 67 missing values handled via imputation
 - 44.5% approval rate
-
-#### Repository
-[github.com/preethikachennareddy/credit-card-approval](https://github.com/preethikachennareddy/credit-card-approval)
 """)
+        st.markdown("**Repository**")
+        st.markdown("[github.com/preethikachennareddy/credit-card-approval](https://github.com/preethikachennareddy/credit-card-approval)")
 
     render_footer()
