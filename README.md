@@ -35,7 +35,7 @@ streamlit run demo/app.py    # opens at localhost:8501
 
 ## Overview
 
-Built on the [UCI Credit Approval dataset](https://archive.ics.uci.edu/dataset/27/credit+approval) (690 applicants, 15 anonymized features). The pipeline covers raw data ingestion, preprocessing, model training, a REST API, PostgreSQL storage, and Power BI dashboards.
+Built on the UCI Credit Approval dataset (690 applicants, 15 anonymized features). The pipeline covers raw data ingestion, preprocessing, model training, a REST API, PostgreSQL storage, and Power BI dashboards.
 
 ```
 crx_raw.csv  →  Preprocessing  →  SVM / Decision Tree  →  FastAPI  →  PostgreSQL  →  Power BI
@@ -295,7 +295,7 @@ See [`powerbi/POWERBI_GUIDE.md`](powerbi/POWERBI_GUIDE.md) for full setup.
 
 UCI Machine Learning Repository — [Credit Approval](https://archive.ics.uci.edu/dataset/27/credit+approval)
 
-> All attribute names and values have been changed to meaningless symbols to protect the confidentiality of the data.
+> NOTE: All attribute names and values have been changed to meaningless symbols to protect the confidentiality of the data.
 
 690 instances · 15 features · Binary classification · 67 missing values (handled via imputation) · 44.5% approval rate
 
