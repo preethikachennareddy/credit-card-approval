@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  # ─── PostgreSQL ───────────────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: credit_postgres
+    environment:
+      POSTGRES_DB: creditdb
+      POSTGRES_USER: credituser
+      POSTGRES_PASSWORD: creditpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U credituser -d creditdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - credit_network
+
+  # ─── FastAPI ML Service ───────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: credit_api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://credituser:creditpass@postgres:5432/creditdb
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - credit_network
+    restart: unless-stopped
+
+  # ─── Streamlit Demo ───────────────────────────────────────────
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile.demo
+    container_name: credit_demo
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data:/app/data
+    networks:
+      - credit_network
+    restart: unless-stopped
+
+  # ─── pgAdmin ──────────────────────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: credit_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@credit.ai
+      PGADMIN_DEFAULT_PASSWORD: adminpass
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - credit_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  credit_network:
+    driver: bridge
