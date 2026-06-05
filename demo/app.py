@@ -20,7 +20,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'app'))
 
 st.set_page_config(
-    page_title="Credit Approval ML — Preethika Chennareddy",
+    page_title="Credit Approval — Preethika Chennareddy",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -196,7 +196,7 @@ except Exception as e:
 FEATURE_COLS = preprocessor.feature_columns
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
-st.sidebar.markdown("## Credit Approval ML")
+st.sidebar.markdown("## Credit Approval")
 st.sidebar.markdown("UCI Credit Approval Dataset")
 st.sidebar.markdown("---")
 
