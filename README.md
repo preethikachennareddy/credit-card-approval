@@ -2,40 +2,45 @@
 
 # Credit Card Approval Prediction
 
-**Machine learning backend service predicting credit card approvals using SVM and Decision Trees**
+**End-to-end machine learning pipeline predicting credit card approvals using SVM and Decision Trees**
 
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://python.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Demo-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Streamlit](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://credit-card-approval-preethika.streamlit.app)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://postgresql.org)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![pytest](https://img.shields.io/badge/Tests-17%20passed-2ecc71?logo=pytest&logoColor=white)](https://pytest.org)
+
+### [View Live Demo](https://credit-card-approval-preethika.streamlit.app)
 
 </div>
 
 ---
 
-## Demo
+## Live Demo
 
+**[https://credit-card-approval-preethika.streamlit.app](https://credit-card-approval-preethika.streamlit.app)**
+
+The interactive demo lets you build an applicant profile using readable dropdowns (gender, marital status, citizenship, employment, credit purpose, etc.) and get instant predictions from both models — with approval probability, risk level, confidence score, and live charts.
+
+To run locally instead:
 ```bash
 pip install -r requirements.txt
 python app/train.py          # train models (~60s)
-streamlit run demo/app.py    # launch interactive demo
+streamlit run demo/app.py    # opens at localhost:8501
 ```
-
-The Streamlit demo lets you adjust an applicant profile with sliders and get instant predictions from both models, with probability scores, risk levels, and live charts.
 
 ---
 
 ## Overview
 
-Built on the [UCI Credit Approval dataset](https://archive.ics.uci.edu/dataset/27/credit+approval) (690 applicants, 15 anonymized features). The pipeline covers everything from raw data ingestion to a REST API and Power BI dashboards.
+Built on the [UCI Credit Approval dataset](https://archive.ics.uci.edu/dataset/27/credit+approval) (690 applicants, 15 anonymized features). The pipeline covers raw data ingestion, preprocessing, model training, a REST API, PostgreSQL storage, and Power BI dashboards.
 
 ```
 crx_raw.csv  →  Preprocessing  →  SVM / Decision Tree  →  FastAPI  →  PostgreSQL  →  Power BI
-                                         ↓
-                                   Streamlit Demo
+                                          ↓
+                                  Streamlit Demo (live)
 ```
 
 ---
@@ -73,11 +78,29 @@ Actual Denied    73       4
 
 | Rank | Feature | Importance |
 |------|---------|-----------|
-| 1 | Prior default | 70.7% |
-| 2 | Credit score | 13.0% |
-| 3 | Income | 8.3% |
+| 1 | Prior default on record | 70.7% |
+| 2 | Credit history score | 13.0% |
+| 3 | Annual income | 8.3% |
 | 4 | Debt ratio | 5.6% |
 | 5 | Years employed | 1.5% |
+
+---
+
+## Feature Reference
+
+The UCI dataset uses anonymized codes. The demo maps these to readable labels:
+
+| Feature | Raw codes | Display label |
+|---------|-----------|--------------| 
+| Gender | `a / b` | Female / Male |
+| Marital status | `u / y / l` | Married / Single / Other |
+| Bank relationship | `g / p / gg` | Existing / New / Former customer |
+| Citizenship | `g / p / s` | Citizen / Permanent resident / Temporary resident |
+| Prior default | `t / f` | Yes / No |
+| Currently employed | `t / f` | Yes / No |
+| Driver's licence | `t / f` | Yes / No |
+| Credit purpose | `c / cc / m / k...` | Consumer goods / Credit card / Mortgage / Car loan... |
+| Applicant group | `v / h / bb...` | Group A / B / C... |
 
 ---
 
@@ -92,15 +115,15 @@ credit-card-approval/
 │   └── db_loader.py         # PostgreSQL bulk loader
 │
 ├── demo/
-│   └── app.py               # Streamlit interactive demo ← start here
+│   └── app.py               # Streamlit interactive demo (live at link above)
 │
 ├── data/
 │   └── crx_raw.csv          # UCI Credit Approval dataset (690 records)
 │
-├── models/                  # Serialized .pkl files (git-ignored, generate with train.py)
-│   ├── decision_tree.pkl
-│   ├── svm.pkl
-│   └── preprocessor.pkl
+├── models/
+│   ├── decision_tree.pkl    # Trained Decision Tree
+│   ├── svm.pkl              # Trained SVM
+│   └── preprocessor.pkl     # Fitted preprocessing pipeline
 │
 ├── reports/
 │   ├── model_metrics.json   # Full evaluation metrics
@@ -116,8 +139,9 @@ credit-card-approval/
 ├── powerbi/
 │   └── POWERBI_GUIDE.md     # Connection setup + DAX measures
 │
-├── docker-compose.yml        # API + PostgreSQL + pgAdmin
+├── docker-compose.yml        # API + PostgreSQL + pgAdmin + Streamlit
 ├── Dockerfile
+├── Dockerfile.demo
 └── requirements.txt
 ```
 
@@ -128,15 +152,11 @@ credit-card-approval/
 ### Option A — Demo only (no Docker needed)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/credit-card-approval.git
+git clone https://github.com/preethikachennareddy/credit-card-approval.git
 cd credit-card-approval
 
 pip install -r requirements.txt
-
-# Train models (generates models/*.pkl and reports/)
 python app/train.py
-
-# Launch interactive demo
 streamlit run demo/app.py
 ```
 
@@ -185,18 +205,16 @@ curl -X POST http://localhost:8000/predict \
   "approval_probability": 0.8741,
   "risk_score": 0.1259,
   "model_used": "ensemble (DT + SVM)",
-  "decision": "APPROVED ✓",
+  "decision": "APPROVED",
   "confidence": "Very High",
   "timestamp": "2024-01-15T10:30:00"
 }
 ```
 
-**Other endpoints**
-
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/predict` | Single applicant prediction |
-| `POST` | `/batch-predict` | Bulk predictions (≤1000) |
+| `POST` | `/batch-predict` | Bulk predictions (up to 1000) |
 | `GET`  | `/metrics` | Model evaluation metrics |
 | `GET`  | `/health` | Service health check |
 | `GET`  | `/model-info/{name}` | Model hyperparameters |
@@ -241,10 +259,7 @@ Running `python app/train.py` produces 12 Seaborn plots in `reports/plots/`:
 
 ```bash
 pytest tests/ -v
-```
-
-```
-17 passed in 1.31s
+# 17 passed in 1.31s
 ```
 
 Covers: preprocessor fit/transform, missing value imputation, label encoding, unseen category handling, model loading, prediction shapes, probability ranges, and AUC thresholds.
@@ -255,15 +270,15 @@ Covers: preprocessor fit/transform, missing value imputation, label encoding, un
 
 See [`powerbi/POWERBI_GUIDE.md`](powerbi/POWERBI_GUIDE.md) for full setup.
 
-4 dashboard pages: Executive Overview · Demographics · Model Performance · Feature Impact  
+4 dashboard pages: Executive Overview · Demographics · Model Performance · Feature Impact
 12 ready-to-paste DAX measures included.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Category | Technology |
-|----------|-----------|
+|----------|-----------| 
 | Language | Python 3.11 |
 | ML | scikit-learn (SVM, Decision Tree, GridSearchCV) |
 | Visualisation | Seaborn, Matplotlib |
@@ -272,7 +287,7 @@ See [`powerbi/POWERBI_GUIDE.md`](powerbi/POWERBI_GUIDE.md) for full setup.
 | Database | PostgreSQL 15 + SQLAlchemy |
 | Containers | Docker + Docker Compose |
 | BI | Microsoft Power BI |
-| Tests | pytest |
+| Tests | pytest (17 unit tests) |
 
 ---
 
@@ -282,7 +297,16 @@ UCI Machine Learning Repository — [Credit Approval](https://archive.ics.uci.ed
 
 > All attribute names and values have been changed to meaningless symbols to protect the confidentiality of the data.
 
-690 instances · 15 features · Binary classification · 67 missing values (handled via imputation)
+690 instances · 15 features · Binary classification · 67 missing values (handled via imputation) · 44.5% approval rate
 
 ---
 
+## License
+
+MIT
+
+---
+
+<div align="center">
+Built by <strong>Preethika Chennareddy</strong> · <a href="https://github.com/preethikachennareddy/credit-card-approval">GitHub</a> · <a href="https://credit-card-approval-preethika.streamlit.app">Live Demo</a>
+</div>
