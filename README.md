@@ -93,12 +93,3 @@ src/
   index.css
 ```
 
----
-
-## Environment Variables
-
-| Variable | Description |
-|---|---|
-| `GEMINI_API_KEY` | Your Gemini API key (get free at aistudio.google.com/app/apikey) |
-
-> **Security note**: This app calls the Gemini API directly from the browser. For production, proxy API calls through your own backend so the key is never exposed to clients.
